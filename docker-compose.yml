@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: nouchka/sqlite3
+  web:
+    build: .
+#    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+#    container_name: jwtauth
+    volumes:
+      - .:/jwt-auth
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///jwt-auth/db.sqlite3
